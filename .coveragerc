@@ -1,0 +1,16 @@
+[report]
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    pragma: no cover
+    raise AssertionError
+    raise NotImplementedError
+    def __repr__
+    @abstractmethod
+omit =
+    */wsgi.py
+    */settings.py
+    */manage.py
+    */admin.py
+    */apps.py
+    .venv/*
+    scripts/*

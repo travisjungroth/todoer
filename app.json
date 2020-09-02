@@ -1,0 +1,23 @@
+{
+  "name": "projectname",
+  "env": {
+    "DJANGO_SECRET_KEY": {
+      "description": "https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-SECRET_KEY"
+    },
+    "DATABASE_URL": {
+      "description": "https://github.com/kennethreitz/dj-database-url"
+    },
+    "CI": {
+      "description": "Set to true if this is a CI environment. Handled by default on Heroku and CircleCI.",
+      "required": false
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
