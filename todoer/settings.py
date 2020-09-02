@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'projectname.urls'
+ROOT_URLCONF = 'todoer.urls'
 
 TEMPLATES = [
     {
@@ -61,7 +61,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'projectname.wsgi.application'
+WSGI_APPLICATION = 'todoer.wsgi.application'
 
 DATABASES = {'default': ENV.db()}
 if ENV('CI', default=False):

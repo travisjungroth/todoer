@@ -1,5 +1,5 @@
 {
-  "name": "projectname",
+  "name": "todoer",
   "env": {
     "DJANGO_SECRET_KEY": {
       "description": "https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-SECRET_KEY"
@@ -10,7 +10,8 @@
     "CI": {
       "description": "Set to true if this is a CI environment. Handled by default on Heroku and CircleCI.",
       "required": false
-    }
+    },
+    "TODOIST_TOKEN": {}
   },
   "addons": [
     "heroku-postgresql"
