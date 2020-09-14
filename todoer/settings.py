@@ -21,7 +21,9 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'ordered_model',
     'users',
+    'todoer',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -97,3 +99,5 @@ ALLOWED_HOSTS = ['*']
 STATIC_ROOT = ROOT('staticfiles')
 STATICFILES_DIRS = ['static']
 STATIC_URL = '/static/'
+
+TODOIST_TOKEN = ENV('TODOIST_TOKEN')

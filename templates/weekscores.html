@@ -1,0 +1,10 @@
+{{ overall }}<br />
+{{ percent }}<br />
+<table>
+{% for score in scores %}
+    <tr>
+    <td>{{ score.name }}</td>
+    <td>{{ score.completed }}/{{ score.total }}</td>
+    </tr>
+{% endfor %}
+</table>

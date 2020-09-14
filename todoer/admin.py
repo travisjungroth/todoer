@@ -1,0 +1,24 @@
+from django.contrib import admin
+from ordered_model.admin import OrderedModelAdmin
+
+from todoer import models
+
+
+@admin.register(models.Schedule)
+class ScheduleAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.TaskTemplate)
+class TaskTemplateAdmin(OrderedModelAdmin):
+    list_display = ('edit', 'name', 'schedule', 'morning', 'reminder_time', 'move_up_down_links')
+    list_editable = ('name', 'schedule', 'morning', 'reminder_time')
+
+    def edit(self, _):
+        return 'edit'
+
+
+@admin.register(models.Task)
+class TaskAdmin(admin.ModelAdmin):
+    list_display = ('name', 'completed', 'date')
+    list_editable = ('completed',)

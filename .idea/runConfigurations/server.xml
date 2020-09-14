@@ -1,11 +1,12 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="server" type="Python.DjangoServer" factoryName="Django server">
-    <module name="$PROJECT_NAME$" />
+    <module name="todoer" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
       <env name="DJANGO_DEBUG" value="True" />
+      <env name="DJANGO_SETTINGS_MODULE" value="todoer.settings" />
     </envs>
     <option name="SDK_HOME" value="$PROJECT_DIR$/.venv/bin/python" />
     <option name="WORKING_DIRECTORY" value="" />
