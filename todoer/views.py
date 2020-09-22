@@ -20,13 +20,13 @@ class WeekScores(TemplateView):
         total = Counter()
         completed = Counter()
         for task in Task.objects.filter(date__gte=a_week_ago, date__lt=today).order_by('order'):
-            total[task.name] += 1
+            total[task.template] += 1
             if task.completed:
-                completed[task.name] += 1
+                completed[task.template] += 1
 
         scores = []
-        for task_name in total:
-            scores.append({'name': task_name, 'completed': completed[task_name], 'total': total[task_name]})
+        for template in total:
+            scores.append({'name': template.name, 'completed': completed[template], 'total': total[template]})
 
         context = super().get_context_data(**kwargs)
         context['scores'] = scores

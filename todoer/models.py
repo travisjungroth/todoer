@@ -31,6 +31,7 @@ class Task(models.Model):
     date = models.DateField(default=now)
     order = models.IntegerField()
     todoist_id = models.BigIntegerField()
+    template = models.ForeignKey(TaskTemplate, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         ordering = ['-date', 'order']
