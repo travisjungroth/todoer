@@ -35,7 +35,8 @@ class Command(BaseCommand):
 
         def make_tasks(morning):
             ids = []
-            for template in TaskTemplate.objects.filter(morning=morning, schedule__days__contains=[now().weekday()]):
+            for template in TaskTemplate.objects.filter(active=True, morning=morning,
+                                                        schedule__days__contains=[now().weekday()]):
                 item = api.quick.add(f'{template.name} #habits today', reminder=template.reminder_time)
                 Task.objects.create(name=template.name, order=template.order, todoist_id=item['id'], template=template)
                 ids.append(item['id'])

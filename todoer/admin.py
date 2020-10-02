@@ -11,8 +11,8 @@ class ScheduleAdmin(admin.ModelAdmin):
 
 @admin.register(models.TaskTemplate)
 class TaskTemplateAdmin(OrderedModelAdmin):
-    list_display = ('edit', 'name', 'schedule', 'morning', 'reminder_time', 'move_up_down_links')
-    list_editable = ('name', 'schedule', 'morning', 'reminder_time')
+    list_display = ('edit', 'name', 'schedule', 'morning', 'reminder_time', 'move_up_down_links', 'active')
+    list_editable = ('name', 'schedule', 'morning', 'reminder_time', 'active')
 
     def edit(self, _):
         return 'edit'

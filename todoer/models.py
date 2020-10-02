@@ -17,6 +17,7 @@ class TaskTemplate(OrderedModel):
     schedule = models.ForeignKey(Schedule, on_delete=models.PROTECT)
     morning = models.BooleanField()
     reminder_time = models.CharField(max_length=10, help_text='like 9pm', blank=True, default='')
+    active = models.BooleanField(default=True)
 
     class Meta(OrderedModel.Meta):
         pass
