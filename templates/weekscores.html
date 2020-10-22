@@ -1,9 +1,15 @@
 {{ overall }}<br />
 {{ percent }}<br />
 <table>
+<thead>
+<td>Name</td>
+<td>Completed/Total</td>
+<td>Streak/Goal</td>
+</thead>
 {% for score in scores %}
     <tr>
     <td>{{ score.name }}</td>
+    <td>{{ score.streak }}/{{ score.goal }}</td>
     <td>{{ score.completed }}/{{ score.total }}</td>
     </tr>
 {% endfor %}
