@@ -2,7 +2,6 @@ from os import path
 
 import environ
 
-
 ROOT = environ.Path(__file__).path('../' * 2)
 ENV = environ.Env(DJANGO_DEBUG=(bool, False), )
 if path.isfile(ROOT('.env')):
@@ -22,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'ordered_model',
+    'debug_toolbar',
     'users',
     'todoer',
 ]
@@ -34,6 +34,7 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = 'home'
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -101,3 +102,7 @@ STATICFILES_DIRS = ['static']
 STATIC_URL = '/static/'
 
 TODOIST_TOKEN = ENV('TODOIST_TOKEN')
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
