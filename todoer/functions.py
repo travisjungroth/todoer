@@ -6,7 +6,8 @@ from todoer.models import Task
 def generate_streaks_and_goals(templates):
     today = now().date()
     d = {}
-    for task in Task.objects.select_related('template').filter(date__lt=today, template__in=templates).order_by('template__order', 'date'):
+    for task in Task.objects.select_related('template').filter(date__lt=today, template__in=templates).order_by(
+            'template__order', 'date'):
         d.setdefault(task.template, []).append(task.completed)
     return {template: f_streak(bools) for template, bools in d.items()}
 

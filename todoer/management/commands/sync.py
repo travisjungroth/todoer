@@ -1,13 +1,11 @@
 from datetime import date
-import json
-import uuid
 
 from django.conf import settings
 from django.core.management import BaseCommand
 from django.utils.timezone import now
-import requests
 from todoist import TodoistAPI
 
+from todoer.functions import generate_streaks_and_goals
 from todoer.models import Task, TaskTemplate
 
 HABITS = 2223119914
@@ -35,9 +33,13 @@ class Command(BaseCommand):
 
         def make_tasks(morning):
             ids = []
-            for template in TaskTemplate.objects.filter(active=True, morning=morning,
-                                                        schedule__days__contains=[now().weekday()]):
-                item = api.quick.add(f'{template.name} #habits today', reminder=template.reminder_time)
+            templates = TaskTemplate.objects.filter(active=True, morning=morning,
+                                                    schedule__days__contains=[now().weekday()])
+            streaks_and_goals = generate_streaks_and_goals(templates)
+            for template in templates:
+                streak, goal = streaks_and_goals[template]
+                item = api.quick.add(f'{template.name} [{streak}/{goal}] #habits today',
+                                     reminder=template.reminder_time)
                 Task.objects.create(name=template.name, order=template.order, todoist_id=item['id'], template=template)
                 ids.append(item['id'])
             return ids
