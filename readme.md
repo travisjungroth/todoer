@@ -1,3 +1,5 @@
+Habits for Todoist is not created by, affiliated with, or supported by Doist.
+
 ### Setup
 Install postgres and pipenv if you haven't    
 Run `scripts/setup.sh` from the base directory of the project.    
