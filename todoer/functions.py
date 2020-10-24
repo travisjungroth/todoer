@@ -1,15 +1,15 @@
 from django.utils.timezone import now
 
-from todoer.models import Task, TaskTemplate
+from todoer.models import Task, Habit
 
 
-def generate_streaks_and_goals(templates):
+def generate_streaks_and_goals(habits):
     today = now().date()
     d = {}
-    for task in Task.objects.select_related('template').filter(date__lt=today, template__in=templates).order_by(
-            'template__order', 'date'):
-        d.setdefault(task.template, []).append(task.completed)
-    return {template: f_streak(bools) for template, bools in d.items()}
+    for task in Task.objects.select_related('habit').filter(date__lt=today, habit__in=habits).order_by(
+            'habit__order', 'date'):
+        d.setdefault(task.habit, []).append(task.completed)
+    return {habit: f_streak(bools) for habit, bools in d.items()}
 
 
 def f_streak(bools):
@@ -26,15 +26,15 @@ def f_streak(bools):
 
 def make_tasks(morning, api, user_now):
     ids = []
-    templates = TaskTemplate.objects.filter(active=True, morning=morning, schedule__days__contains=[user_now.weekday()])
-    streaks_and_goals = generate_streaks_and_goals(templates)
-    for template in templates:
-        if template.streaks_and_goals:
-            streak, goal = streaks_and_goals[template]
-            text = f'{template.name} [{streak}/{goal}] #habits today'
+    habits = Habit.objects.filter(active=True, morning=morning, schedule__days__contains=[user_now.weekday()])
+    streaks_and_goals = generate_streaks_and_goals(habits)
+    for habit in habits:
+        if habit.streaks_and_goals:
+            streak, goal = streaks_and_goals[habit]
+            text = f'{habit.name} [{streak}/{goal}] #habits today'
         else:
-            text = f'{template.name} #habits today'
-        item = api.quick.add(text, reminder=template.reminder_time)
-        Task.objects.create(name=template.name, order=template.order, todoist_id=item['id'], template=template)
+            text = f'{habit.name} #habits today'
+        item = api.quick.add(text, reminder=habit.reminder_time)
+        Task.objects.create(name=habit.name, order=habit.order, todoist_id=item['id'], habit=habit)
         ids.append(item['id'])
     return ids

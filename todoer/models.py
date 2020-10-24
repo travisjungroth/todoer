@@ -16,7 +16,7 @@ class Schedule(models.Model):
         return self.name
 
 
-class TaskTemplate(OrderedModel):
+class Habit(OrderedModel):
     name = models.CharField(max_length=255)
     schedule = models.ForeignKey(Schedule, on_delete=models.PROTECT)
     morning = models.BooleanField()
@@ -38,7 +38,7 @@ class Task(models.Model):
     date = models.DateField(default=now)
     order = models.IntegerField()
     todoist_id = models.BigIntegerField()
-    template = models.ForeignKey(TaskTemplate, on_delete=models.SET_NULL, null=True)
+    habit = models.ForeignKey(Habit, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:

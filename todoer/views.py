@@ -20,20 +20,20 @@ class WeekScores(TemplateView):
         a_week_ago = today - timedelta(days=7)
         total = Counter()
         completed = Counter()
-        for task in Task.objects.select_related('template').filter(date__gte=a_week_ago, date__lt=today).order_by('order'):
-            total[task.template] += 1
+        for task in Task.objects.select_related('habit').filter(date__gte=a_week_ago, date__lt=today).order_by('order'):
+            total[task.habit] += 1
             if task.completed:
-                completed[task.template] += 1
+                completed[task.habit] += 1
 
         streaks_and_goals = generate_streaks_and_goals(total)
         scores = []
-        for template in total:
-            streak, goal = streaks_and_goals[template]
+        for habit in total:
+            streak, goal = streaks_and_goals[habit]
             scores.append(
                 {
-                    'name': template.name,
-                    'completed': completed[template],
-                    'total': total[template],
+                    'name': habit.name,
+                    'completed': completed[habit],
+                    'total': total[habit],
                     'streak': streak,
                     'goal': goal,
                 }
