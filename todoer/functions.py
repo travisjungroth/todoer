@@ -30,9 +30,12 @@ def make_tasks(morning, api):
                                             schedule__days__contains=[now().weekday()])
     streaks_and_goals = generate_streaks_and_goals(templates)
     for template in templates:
-        streak, goal = streaks_and_goals[template]
-        item = api.quick.add(f'{template.name} [{streak}/{goal}] #habits today',
-                             reminder=template.reminder_time)
+        if template.streaks_and_goals:
+            streak, goal = streaks_and_goals[template]
+            text = f'{template.name} [{streak}/{goal}] #habits today'
+        else:
+            text = f'{template.name} #habits today'
+        item = api.quick.add(text, reminder=template.reminder_time)
         Task.objects.create(name=template.name, order=template.order, todoist_id=item['id'], template=template)
         ids.append(item['id'])
     return ids
