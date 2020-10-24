@@ -13,7 +13,9 @@ class Command(BaseCommand):
         user = get_user_model().get()
         api = TodoistAPI(user.profile.api_token)
         api.sync()
-        project_id = api.projects.all(lambda x: x['name'] == user.profile.project_name)[-1]['id']
+        project_id = api.projects.all(
+            lambda x: x['name'] == user.profile.project_name and not x['is_archived']
+        )[-1]['id']
 
         for uncompleted_item in api.projects.get_data(project_id)['items']:
             api.items.delete(uncompleted_item['id'])
