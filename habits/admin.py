@@ -1,7 +1,7 @@
 from django.contrib import admin
 from ordered_model.admin import OrderedModelAdmin
 
-from todoer import models
+from habits import models
 
 
 @admin.register(models.Schedule)

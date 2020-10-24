@@ -4,8 +4,8 @@ from django.core.management import BaseCommand
 import pytz
 from todoist import TodoistAPI
 
-from todoer.functions import make_tasks
-from todoer.models import Task, User
+from habits.functions import make_tasks
+from habits.models import Task, User
 
 
 class Command(BaseCommand):

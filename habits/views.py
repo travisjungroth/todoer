@@ -4,8 +4,8 @@ from datetime import timedelta
 from django.utils.timezone import now
 from django.views.generic import TemplateView
 
-from todoer.functions import generate_streaks_and_goals
-from todoer.models import Task
+from habits.functions import generate_streaks_and_goals
+from habits.models import Task
 
 
 class Home(TemplateView):

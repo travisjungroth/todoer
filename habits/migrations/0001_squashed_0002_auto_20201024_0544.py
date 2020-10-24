@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=255)),
                 ('morning', models.BooleanField()),
                 ('reminder_time', models.CharField(blank=True, default='', help_text='like 9pm', max_length=10)),
-                ('schedule', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='todoer.schedule')),
+                ('schedule', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='habits.schedule')),
                 ('active', models.BooleanField(default=True)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.user')),
                 ('streaks_and_goals', models.BooleanField(default=True)),
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                 ('date', models.DateField(default=django.utils.timezone.now)),
                 ('order', models.IntegerField()),
                 ('todoist_id', models.BigIntegerField()),
-                ('template', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='todoer.tasktemplate')),
+                ('template', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='habits.tasktemplate')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.user')),
             ],
             options={

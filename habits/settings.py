@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     'ordered_model',
     'debug_toolbar',
     'users',
-    'todoer',
+    'habits',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -45,7 +45,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'todoer.urls'
+ROOT_URLCONF = 'habits.urls'
 
 TEMPLATES = [
     {
@@ -64,7 +64,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'todoer.wsgi.application'
+WSGI_APPLICATION = 'habits.wsgi.application'
 
 DATABASES = {'default': ENV.db()}
 if ENV('CI', default=False):

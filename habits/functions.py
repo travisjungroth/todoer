@@ -1,6 +1,6 @@
 from django.utils.timezone import now
 
-from todoer.models import Task, Habit
+from habits.models import Task, Habit
 
 
 def generate_streaks_and_goals(habits):

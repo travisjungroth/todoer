@@ -6,7 +6,7 @@
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
       <env name="DJANGO_DEBUG" value="True" />
-      <env name="DJANGO_SETTINGS_MODULE" value="todoer.settings" />
+      <env name="DJANGO_SETTINGS_MODULE" value="habits.settings" />
     </envs>
     <option name="SDK_HOME" value="$PROJECT_DIR$/.venv/bin/python" />
     <option name="WORKING_DIRECTORY" value="" />
