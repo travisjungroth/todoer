@@ -1,6 +1,6 @@
 from datetime import date
 
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core.management import BaseCommand
 from todoist import TodoistAPI
 
@@ -12,7 +12,8 @@ HABITS = 2223119914
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        api = TodoistAPI(settings.TODOIST_TOKEN)
+        user = get_user_model().get()
+        api = TodoistAPI(user.api_token)
         api.sync()
 
         for uncompleted_item in api.projects.get_data(HABITS)['items']:
