@@ -24,10 +24,9 @@ def f_streak(bools):
     return streak, goal
 
 
-def make_tasks(morning, api):
+def make_tasks(morning, api, user_now):
     ids = []
-    templates = TaskTemplate.objects.filter(active=True, morning=morning,
-                                            schedule__days__contains=[now().weekday()])
+    templates = TaskTemplate.objects.filter(active=True, morning=morning, schedule__days__contains=[user_now.weekday()])
     streaks_and_goals = generate_streaks_and_goals(templates)
     for template in templates:
         if template.streaks_and_goals:
