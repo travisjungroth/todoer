@@ -7,19 +7,18 @@ from todoist import TodoistAPI
 from todoer.functions import make_tasks
 from todoer.models import Task
 
-HABITS = 2223119914
-
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
         user = get_user_model().get()
         api = TodoistAPI(user.profile.api_token)
         api.sync()
+        project_id = api.projects.all(lambda x: x['name'] == user.profile.project_name)[-1]['id']
 
-        for uncompleted_item in api.projects.get_data(HABITS)['items']:
+        for uncompleted_item in api.projects.get_data(project_id)['items']:
             api.items.delete(uncompleted_item['id'])
 
-        for completed_item in api.items.get_completed(HABITS):
+        for completed_item in api.items.get_completed(project_id):
             try:
                 task = Task.objects.get(todoist_id=completed_item['id'])
                 task.completed = True

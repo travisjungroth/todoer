@@ -11,6 +11,7 @@ class User(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     api_token = models.CharField(default='', blank=True, max_length=255)
+    project_name = models.CharField(default='habits', max_length=255)
 
 
 @receiver(post_save, sender=User)
