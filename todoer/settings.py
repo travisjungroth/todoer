@@ -101,8 +101,6 @@ STATIC_ROOT = ROOT('staticfiles')
 STATICFILES_DIRS = ['static']
 STATIC_URL = '/static/'
 
-TODOIST_TOKEN = ENV('TODOIST_TOKEN')
-
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
