@@ -2,11 +2,10 @@ from datetime import date
 
 from django.conf import settings
 from django.core.management import BaseCommand
-from django.utils.timezone import now
 from todoist import TodoistAPI
 
-from todoer.functions import generate_streaks_and_goals
-from todoer.models import Task, TaskTemplate
+from todoer.functions import make_tasks
+from todoer.models import Task
 
 HABITS = 2223119914
 
@@ -31,25 +30,12 @@ class Command(BaseCommand):
         api.commit(raise_on_error=True)
         api.sync()
 
-        def make_tasks(morning):
-            ids = []
-            templates = TaskTemplate.objects.filter(active=True, morning=morning,
-                                                    schedule__days__contains=[now().weekday()])
-            streaks_and_goals = generate_streaks_and_goals(templates)
-            for template in templates:
-                streak, goal = streaks_and_goals[template]
-                item = api.quick.add(f'{template.name} [{streak}/{goal}] #habits today',
-                                     reminder=template.reminder_time)
-                Task.objects.create(name=template.name, order=template.order, todoist_id=item['id'], template=template)
-                ids.append(item['id'])
-            return ids
-
         today = str(date.today())
         existing_today_tasks = [task['id'] for task in api['items'] if
                                 task['due'] is not None and task['due']['date'] == today]
-        ids = make_tasks(morning=True)
+        ids = make_tasks(morning=True, api=api)
         ids.extend(existing_today_tasks)
-        ids.extend(make_tasks(morning=False))
+        ids.extend(make_tasks(morning=False, api=api))
         ids_to_orders = {id_: i for i, id_ in enumerate(ids)}
         api.items.update_day_orders(ids_to_orders)
         api.commit(raise_on_error=True)

@@ -1,6 +1,6 @@
 from django.utils.timezone import now
 
-from todoer.models import Task
+from todoer.models import Task, TaskTemplate
 
 
 def generate_streaks_and_goals(templates):
@@ -22,3 +22,17 @@ def f_streak(bools):
             goal = next(fibonacci)
         streak = streak + 1 if b else 0
     return streak, goal
+
+
+def make_tasks(morning, api):
+    ids = []
+    templates = TaskTemplate.objects.filter(active=True, morning=morning,
+                                            schedule__days__contains=[now().weekday()])
+    streaks_and_goals = generate_streaks_and_goals(templates)
+    for template in templates:
+        streak, goal = streaks_and_goals[template]
+        item = api.quick.add(f'{template.name} [{streak}/{goal}] #habits today',
+                             reminder=template.reminder_time)
+        Task.objects.create(name=template.name, order=template.order, todoist_id=item['id'], template=template)
+        ids.append(item['id'])
+    return ids
