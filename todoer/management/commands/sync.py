@@ -13,7 +13,7 @@ HABITS = 2223119914
 class Command(BaseCommand):
     def handle(self, *args, **options):
         user = get_user_model().get()
-        api = TodoistAPI(user.api_token)
+        api = TodoistAPI(user.profile.api_token)
         api.sync()
 
         for uncompleted_item in api.projects.get_data(HABITS)['items']:
