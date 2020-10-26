@@ -15,22 +15,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Task',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('completed', models.BooleanField(default=False)),
-                ('date', models.DateField(default=django.utils.timezone.now)),
-                ('order', models.IntegerField()),
-                ('todoist_id', models.BigIntegerField()),
-                ('habit', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='habits.habit')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.user')),
-            ],
-            options={
-                'ordering': ['-date', 'order'],
-            },
-        ),
-        migrations.CreateModel(
             name='Habit',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -46,6 +30,23 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ('order',),
                 'abstract': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='Task',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=255)),
+                ('completed', models.BooleanField(default=False)),
+                ('date', models.DateField(default=django.utils.timezone.now)),
+                ('order', models.IntegerField()),
+                ('todoist_id', models.BigIntegerField()),
+                (
+                'habit', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='habits.habit')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.user')),
+            ],
+            options={
+                'ordering': ['-date', 'order'],
             },
         ),
     ]
