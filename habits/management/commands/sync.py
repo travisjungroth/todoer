@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from allauth.socialaccount.models import SocialToken
 from django.core.management import BaseCommand
 import pytz
 from todoist import TodoistAPI
@@ -10,16 +11,17 @@ from habits.models import Task, User
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        for user in User.objects.exclude(profile__api_token=''):
+        for user in User.objects.all():
             try:
-                api = TodoistAPI(user.profile.api_token)
+                token = SocialToken.objects.get(app__name='Todoist', account__user=user).token
+                api = TodoistAPI(token)
                 user_tz = pytz.timezone(api.user.get()['tz_info']['timezone'])
                 user_now = datetime.now(user_tz)
                 if user_now.hour != 0 or user_now.fold:
                     continue
 
                 project_id = api.projects.all(
-                    lambda x: x['name'] == user.profile.project_name and not x['is_archived']
+                    lambda x: x['name'] == 'habits' and not x['is_archived']
                 )[-1]['id']
 
                 for uncompleted_item in api.projects.get_data(project_id)['items']:

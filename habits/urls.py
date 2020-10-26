@@ -7,6 +7,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('', views.WeekScores.as_view()),
+    path('', views.WeekScores.as_view(), name='home'),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
