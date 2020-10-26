@@ -42,6 +42,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'data:read_write',
             'data:delete',
         ],
+        'VERIFIED_EMAIL': True,
     }
 }
 
