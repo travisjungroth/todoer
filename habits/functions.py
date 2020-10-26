@@ -24,9 +24,9 @@ def f_streak(bools):
     return streak, goal
 
 
-def make_tasks(morning, api, user_now):
+def make_tasks(morning, api, user_now, user):
     ids = []
-    habits = Habit.objects.filter(active=True, morning=morning, schedule__days__contains=[user_now.weekday()])
+    habits = Habit.objects.filter(active=True, morning=morning, schedule__days__contains=[user_now.weekday()], user=user)
     streaks_and_goals = generate_streaks_and_goals(habits)
     for habit in habits:
         if habit.streaks_and_goals:
@@ -35,6 +35,6 @@ def make_tasks(morning, api, user_now):
         else:
             text = f'{habit.name} #habits today'
         item = api.quick.add(text, reminder=habit.reminder_time)
-        Task.objects.create(name=habit.name, order=habit.order, todoist_id=item['id'], habit=habit)
+        Task.objects.create(name=habit.name, order=habit.order, todoist_id=item['id'], habit=habit, user=user)
         ids.append(item['id'])
     return ids

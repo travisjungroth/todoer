@@ -39,9 +39,9 @@ class Command(BaseCommand):
                 today_str = str(user_now.date())
                 existing_today_tasks = [task['id'] for task in api['items'] if
                                         task['due'] is not None and task['due']['date'] == today_str]
-                ids = make_tasks(morning=True, api=api, user_now=user_now)
+                ids = make_tasks(morning=True, api=api, user_now=user_now, user=user)
                 ids.extend(existing_today_tasks)
-                ids.extend(make_tasks(morning=False, api=api, user_now=user_now))
+                ids.extend(make_tasks(morning=False, api=api, user_now=user_now, user=user))
                 ids_to_orders = {id_: i for i, id_ in enumerate(ids)}
                 api.items.update_day_orders(ids_to_orders)
                 api.commit(raise_on_error=True)
