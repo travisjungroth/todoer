@@ -27,12 +27,15 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'users',
     'habits',
+    'todoist_oauth2',
 ]
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = 'home'
