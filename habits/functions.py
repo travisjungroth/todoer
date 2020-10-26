@@ -35,6 +35,6 @@ def make_tasks(morning, api, user_now, user):
         else:
             text = f'{habit.name} #habits today'
         item = api.quick.add(text, reminder=habit.reminder_time)
-        Task.objects.create(name=habit.name, order=habit.order, todoist_id=item['id'], habit=habit, user=user)
+        Task.objects.create(name=habit.name, order=habit.order, todoist_id=item['id'], habit=habit)
         ids.append(item['id'])
     return ids

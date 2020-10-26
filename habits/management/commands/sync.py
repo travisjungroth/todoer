@@ -27,7 +27,7 @@ class Command(BaseCommand):
 
                 for completed_item in api.items.get_completed(project_id):
                     try:
-                        task = Task.objects.get(todoist_id=completed_item['id'])
+                        task = Task.objects.get(todoist_id=completed_item['id'], habit__user=user)
                         task.completed = True
                         task.save()
                     except Task.DoesNotExist:
