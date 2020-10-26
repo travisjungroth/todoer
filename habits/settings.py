@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'ordered_model',
     'debug_toolbar',
+    'bootstrap4',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
