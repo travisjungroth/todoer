@@ -32,6 +32,7 @@ class Command(BaseCommand):
                         task.save()
                     except Task.DoesNotExist:
                         pass
+                    api.items.delete(completed_item['id'])
 
                 api.commit(raise_on_error=True)
                 api.sync()
