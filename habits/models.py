@@ -29,7 +29,7 @@ class Task(models.Model):
     date = models.DateField(default=now)
     order = models.IntegerField()
     todoist_id = models.BigIntegerField()
-    habit = models.ForeignKey(Habit, on_delete=models.SET_NULL, null=True)
+    habit = models.ForeignKey(Habit, on_delete=models.CASCADE, null=True)
 
     class Meta:
         ordering = ['-date', 'order']
