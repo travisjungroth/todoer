@@ -20,7 +20,7 @@ class Habit(OrderedModel):
         pass
 
     def __str__(self):
-        return f'{self.name} on {", ".join(self.days)}'
+        return f'{self.name} on {",".join(map(str, self.days))}'
 
 
 class Task(models.Model):
