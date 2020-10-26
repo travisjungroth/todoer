@@ -42,5 +42,8 @@ class WeekScores(TemplateView):
         context = super().get_context_data(**kwargs)
         context['scores'] = scores
         context['overall'] = f'{sum(completed.values())}/{sum(total.values())}'
-        context['percent'] = f'{round(sum(completed.values()) / sum(total.values()) * 100)}%'
+        try:
+            context['percent'] = f'{round(sum(completed.values()) / sum(total.values()) * 100)}%'
+        except ZeroDivisionError:
+            context['percent'] = '0%'
         return context
