@@ -22,12 +22,16 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'ordered_model',
     'debug_toolbar',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'users',
     'habits',
 ]
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 SITE_ID = 1
