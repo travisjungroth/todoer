@@ -36,6 +36,14 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+SOCIALACCOUNT_PROVIDERS = {
+    'todoist': {
+        'SCOPE': [
+            'data:read_write',
+            'data:delete',
+        ],
+    }
+}
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = 'home'
