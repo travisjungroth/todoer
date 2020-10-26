@@ -7,18 +7,9 @@ from ordered_model.models import OrderedModel
 User = get_user_model()
 
 
-class Schedule(models.Model):
-    name = models.CharField(max_length=255)
-    days = ArrayField(base_field=models.IntegerField())
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-
 class Habit(OrderedModel):
     name = models.CharField(max_length=255)
-    schedule = models.ForeignKey(Schedule, on_delete=models.PROTECT)
+    days = ArrayField(base_field=models.IntegerField())
     morning = models.BooleanField()
     reminder_time = models.CharField(max_length=10, help_text='like 9pm', blank=True, default='')
     active = models.BooleanField(default=True)
@@ -29,7 +20,7 @@ class Habit(OrderedModel):
         pass
 
     def __str__(self):
-        return f'{self.name} on {self.schedule.name.lower()}'
+        return f'{self.name} on {", ".join(self.days)}'
 
 
 class Task(models.Model):
