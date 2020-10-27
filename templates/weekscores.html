@@ -1,21 +1,20 @@
-<html lang="en">
-<head><title></title></head>
-<body>
-{{ overall }}<br />
-{{ percent }}<br />
-<table>
-<thead>
-<td>Name</td>
-<td>Streak/Goal</td>
-<td>Completed/Total</td>
-</thead>
-{% for score in scores %}
-    <tr>
-    <td>{{ score.name }}</td>
-    <td>{{ score.streak }}/{{ score.goal }}</td>
-    <td>{{ score.completed }}/{{ score.total }}</td>
-    </tr>
-{% endfor %}
-</table>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block main %}
+    {{ overall }}<br/>
+    {{ percent }}<br/>
+    <table class="table">
+        <thead>
+        <td>Name</td>
+        <td>Streak/Goal</td>
+        <td>Completed/Total</td>
+        </thead>
+        {% for score in scores %}
+            <tr>
+                <td>{{ score.name }}</td>
+                <td>{{ score.streak }}/{{ score.goal }}</td>
+                <td>{{ score.completed }}/{{ score.total }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

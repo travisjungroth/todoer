@@ -121,3 +121,32 @@ STATIC_URL = '/static/'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+
+BOOTSTRAP4_DEFAULTS = {
+    "css_url": {
+        "href": "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css",
+        "integrity": "sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z",
+        "crossorigin": "anonymous",
+    },
+    "javascript_url": {
+        "url": "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js",
+        "integrity": "sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV",
+        "crossorigin": "anonymous",
+    },
+    "jquery_url": {
+        "url": "https://code.jquery.com/jquery-3.5.1.min.js",
+        "integrity": "sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2",
+        "crossorigin": "anonymous",
+    },
+    "jquery_slim_url": {
+        "url": "https://code.jquery.com/jquery-3.5.1.slim.min.js",
+        "integrity": "sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj",
+        "crossorigin": "anonymous",
+    },
+    "popper_url": {
+        "url": "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js",
+        "integrity": "sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo",
+        "crossorigin": "anonymous",
+    }
+}
