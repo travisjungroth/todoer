@@ -22,11 +22,11 @@
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a href="{% url 'account_logout' %}" class="dropdown-item">Log Out</a>
+                    <a href="{% url 'logout' %}" class="dropdown-item">Log Out</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a href="{% url 'account_login' %}" class="nav-link">Sign Up or Log in with Todoist</a>
+                    <a href="{% url 'todoist_login' %}" class="nav-link">Sign Up or Log in with Todoist</a>
                 </li>
             {% endif %}
         </ul>
