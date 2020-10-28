@@ -12,6 +12,7 @@ class TodoistProvider(OAuth2Provider):
     account_class = TodoistAccount
 
     def extract_uid(self, data):
+        print(repr(data))
         return str(data["email"])
 
     def extract_common_fields(self, data):
