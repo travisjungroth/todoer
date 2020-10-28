@@ -15,6 +15,7 @@ class Command(BaseCommand):
             try:
                 token = SocialToken.objects.get(app__name='Todoist', account__user=user).token
                 api = TodoistAPI(token)
+                api.sync()
                 user_tz = pytz.timezone(api.user.get()['tz_info']['timezone'])
                 user_now = datetime.now(user_tz)
                 if user_now.hour != 0 or user_now.fold:
