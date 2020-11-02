@@ -4,10 +4,10 @@ from datetime import timedelta
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.timezone import now
 from django.views import View
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 
 from habits.forms import HabitFormSet, HabitFormSetHelper
@@ -51,6 +51,11 @@ class HabitMove(LoginRequiredMixin, View):
         habit = get_object_or_404(Habit, pk=pk, user=self.request.user)
         getattr(habit, direction)()
         return HttpResponseRedirect(reverse('habits'))
+
+
+class HabitDelete(DeleteView):
+    model = Habit
+    success_url = reverse_lazy('habits')
 
 
 class WeekScores(TemplateView):

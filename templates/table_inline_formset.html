@@ -69,7 +69,11 @@
                     </a>
                 {% endif %}
             </td>
-            <td>delete</td>
+            <td>
+                {% if form.instance.pk %}
+                    <a href="{% url 'habit-delete' form.instance.pk %}" class="btn btn-sm btn-secondary">Delete</a>
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
     </tbody>

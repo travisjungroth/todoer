@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% block main %}
+    <h2 class="m-4">Delete Habit</h2>
+    <form method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object.name }}"? This will also delete this habit's history. You may just
+            want to deactivate it.</p>
+        <input type="submit" value="Confirm">
+    </form>
+{% endblock %}
