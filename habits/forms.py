@@ -28,5 +28,5 @@ HabitFormSet = forms.modelformset_factory(
 class HabitFormSetHelper(FormHelper):
     def __init__(self, form=None):
         super().__init__(form)
-        self.template = 'table_inline_formset.html'
+        self.template = 'habits/habit_formset.html'
         self.add_input(Submit("submit", "Save"))

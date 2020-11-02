@@ -8,7 +8,6 @@ from django.urls import reverse, reverse_lazy
 from django.utils.timezone import now
 from django.views import View
 from django.views.generic import TemplateView, FormView, DeleteView
-from django.views.generic.detail import SingleObjectMixin
 
 from habits.forms import HabitFormSet, HabitFormSetHelper
 from habits.functions import generate_streaks_and_goals
@@ -20,7 +19,7 @@ class Home(TemplateView):
 
 
 class HabitView(LoginRequiredMixin, FormView):
-    template_name = 'habits.html'
+    template_name = 'habits/habits.html'
     form_class = HabitFormSet
 
     def get_form_kwargs(self):
@@ -59,7 +58,7 @@ class HabitDelete(DeleteView):
 
 
 class WeekScores(TemplateView):
-    template_name = 'weekscores.html'
+    template_name = 'habits/weekscores.html'
 
     def get_context_data(self, **kwargs):
         today = now().date()
