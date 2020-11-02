@@ -15,7 +15,7 @@ class HabitForm(forms.ModelForm):
 
     class Meta:
         model = Habit
-        fields = ['name', 'days', 'morning', 'reminder_time', 'active', 'streaks']
+        fields = ['name', 'days', 'morning', 'reminder_time', 'streaks', 'active']
 
 
 HabitFormSet = forms.modelformset_factory(
