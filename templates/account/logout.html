@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block main %}
+        <form method="post" action="{% url 'logout' %}" class="form mt-5">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <p>Are you sure you want to log out?</p>
+            <button type="submit" class="btn btn-secondary">Log Out</button>
+        </form>
+{% endblock %}

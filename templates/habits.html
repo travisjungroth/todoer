@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% block main %}
+    <h2 class="m-4">Habits</h2>
+    {% crispy formset helper %}
+{% endblock %}

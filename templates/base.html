@@ -1,0 +1,30 @@
+{% load bootstrap4 %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Habits for Todoist</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    <style>
+        .custom-checkbox {
+            display: revert;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    {% include 'nav_bar.html' %}
+</header>
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        {% bootstrap_messages %}
+        {% block content %}
+        {% endblock %}
+        {% block main %}
+        {% endblock %}
+    </div>
+</main>
+</body>
+</html>

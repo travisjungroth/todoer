@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Habits for Todoist</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+            aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'habits' %}" class="nav-link">Habits</a>
+                </li>
+{#                <li class="nav-item">#}
+{#                    <a href="{% url 'tasks' %}" class="nav-link">Tasks</a>#}
+{#                </li>#}
+                <li class="nav-item">
+                    <a href="{% url 'report' %}" class="nav-link">Report</a>
+                </li>
+            {% endif %}
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" class="dropdown-item">Log Out</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'todoist_login' %}" class="nav-link">Sign Up or Log in with Todoist</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
