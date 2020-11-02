@@ -11,9 +11,9 @@ class Habit(OrderedModel):
     name = models.CharField(max_length=255)
     days = ArrayField(base_field=models.IntegerField())
     morning = models.BooleanField()
-    reminder_time = models.CharField(max_length=10, help_text='like 9pm', blank=True, default='')
+    reminder_time = models.CharField(max_length=10, blank=True, default='')
     active = models.BooleanField(default=True)
-    streaks_and_goals = models.BooleanField(default=True)
+    show_streaks = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta(OrderedModel.Meta):

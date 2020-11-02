@@ -1,13 +1,14 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from django.forms import modelformset_factory
+from django import forms
 
 from habits.models import Habit
 
-
-HabitFormSet = modelformset_factory(
+HabitFormSet = forms.modelformset_factory(
     Habit,
-    fields=['name', 'days', 'morning', 'reminder_time', 'active', 'streaks_and_goals']
+    fields=['name', 'days', 'morning', 'reminder_time', 'active', 'show_streaks'],
+    can_delete=True,
+    extra=1,
 )
 
 
@@ -16,4 +17,3 @@ class HabitFormSetHelper(FormHelper):
         super().__init__(form)
         self.template = 'bootstrap4/table_inline_formset.html'
         self.add_input(Submit("submit", "Save"))
-        self.use_custom_control = False
