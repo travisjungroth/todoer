@@ -11,6 +11,7 @@ urlpatterns = [
     path('accounts/logout/', logout, name="logout"),
     path('accounts/', include('todoist_oauth2.urls')),
     path('habits/', views.HabitView.as_view(), name='habits'),
+    path('habits/<int:pk>/move/<str:direction>/', views.HabitMove.as_view(), name='habit-reorder'),
     path('report/', views.WeekScores.as_view(), name='report'),
     path('__debug__/', include(debug_toolbar.urls)),
 ]

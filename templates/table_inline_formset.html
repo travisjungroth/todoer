@@ -1,6 +1,7 @@
 {% load crispy_forms_tags %}
 {% load crispy_forms_utils %}
 {% load crispy_forms_field %}
+{% load static %}
 
 {% specialspaceless %}
     {% if formset_tag %}
@@ -29,6 +30,7 @@
                     </th>
                 {% endif %}
             {% endfor %}
+            <th>Move</th>
             <th>Delete</th>
         </tr>
     {% endif %}
@@ -50,6 +52,23 @@
             {% for field in form %}
                 {% include 'bootstrap4/field.html' with tag="td" form_show_labels=False %}
             {% endfor %}
+
+            <td>
+                {% if form.instance.pk %}
+                    <a href="{% url "habit-reorder" form.instance.pk 'top' %}">
+                        <img src="{% static 'ordered_model/arrow-top.gif' %}" alt="top">
+                    </a>
+                    <a href="{% url "habit-reorder" form.instance.pk 'up' %}">
+                        <img src="{% static 'ordered_model/arrow-up.gif' %}" alt="up">
+                    </a>
+                    <a href="{% url "habit-reorder" form.instance.pk 'down' %}">
+                        <img src="{% static 'ordered_model/arrow-down.gif' %}" alt="down">
+                    </a>
+                    <a href="{% url "habit-reorder" form.instance.pk 'bottom' %}">
+                        <img src="{% static 'ordered_model/arrow-bottom.gif' %}" alt="bottom">
+                    </a>
+                {% endif %}
+            </td>
             <td>delete</td>
         </tr>
     {% endfor %}

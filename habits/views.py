@@ -2,9 +2,13 @@ from collections import Counter
 from datetime import timedelta
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.utils.timezone import now
+from django.views import View
 from django.views.generic import TemplateView, FormView
+from django.views.generic.detail import SingleObjectMixin
 
 from habits.forms import HabitFormSet, HabitFormSetHelper
 from habits.functions import generate_streaks_and_goals
@@ -34,7 +38,19 @@ class HabitView(LoginRequiredMixin, FormView):
         context = super().get_context_data(**kwargs)
         context['helper'] = HabitFormSetHelper()
         context['formset'] = context.pop('form')
+        context['directions'] = HabitMove.allowed_directions
         return context
+
+
+class HabitMove(LoginRequiredMixin, View):
+    allowed_directions = ('top', 'up', 'down', 'bottom')
+
+    def get(self, request, pk, direction):
+        if direction not in self.allowed_directions:
+            raise Http404()
+        habit = get_object_or_404(Habit, pk=pk, user=self.request.user)
+        getattr(habit, direction)()
+        return HttpResponseRedirect(reverse('habits'))
 
 
 class WeekScores(TemplateView):
