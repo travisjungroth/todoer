@@ -9,7 +9,7 @@ from django.utils.timezone import now
 from django.views import View
 from django.views.generic import TemplateView, FormView, DeleteView
 
-from habits.forms import HabitFormSet, HabitFormSetHelper
+from habits.forms import HabitFormSet, HabitFormSetHelper, TaskFormSetHelper, TaskFormSet
 from habits.functions import generate_streaks_and_goals
 from habits.models import Task, Habit
 
@@ -55,6 +55,21 @@ class HabitMove(LoginRequiredMixin, View):
 class HabitDelete(DeleteView):
     model = Habit
     success_url = reverse_lazy('habits')
+
+
+class TaskView(LoginRequiredMixin, FormView):
+    template_name = 'habits/tasks.html'
+    form_class = TaskFormSet
+    success_url = reverse_lazy('tasks')
+
+    def get_form_kwargs(self):
+        return super().get_form_kwargs() | {'queryset': Task.objects.filter(habit__user=self.request.user)}
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['helper'] = TaskFormSetHelper()
+        context['formset'] = context.pop('form')
+        return context
 
 
 class WeekScores(TemplateView):
