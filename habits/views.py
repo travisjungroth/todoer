@@ -72,8 +72,8 @@ class TaskView(LoginRequiredMixin, FormView):
         return context
 
 
-class WeekScores(TemplateView):
-    template_name = 'habits/weekscores.html'
+class WeeklyReport(TemplateView):
+    template_name = 'habits/weekly-report.html'
 
     def get_context_data(self, **kwargs):
         today = now().date()

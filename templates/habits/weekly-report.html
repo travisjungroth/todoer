@@ -3,11 +3,13 @@
 {% block main %}
     {{ overall }}<br/>
     {{ percent }}<br/>
-    <table class="table">
+    <table class="table table-striped table-sm">
         <thead>
-        <td>Name</td>
-        <td>Streak/Goal</td>
-        <td>Completed/Total</td>
+        <tr>
+            <td>Name</td>
+            <td>Streak/Goal</td>
+            <td>Completed/Total</td>
+        </tr>
         </thead>
         {% for score in scores %}
             <tr>
