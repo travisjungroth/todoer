@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.utils.timezone import now
 from django.views.generic import TemplateView, FormView
 
-from habits.forms import HabitFormSet
+from habits.forms import HabitFormSet, HabitFormSetHelper
 from habits.functions import generate_streaks_and_goals
 from habits.models import Task, Habit
 
@@ -29,6 +29,12 @@ class HabitView(LoginRequiredMixin, FormView):
             inner_form.instance.user = self.request.user
         form.save()
         return HttpResponseRedirect(self.request.path)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['helper'] = HabitFormSetHelper()
+        context['formset'] = context.pop('form')
+        return context
 
 
 class WeekScores(TemplateView):
