@@ -1,11 +1,10 @@
 from collections import Counter
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.utils.timezone import now
 from django.views import View
 from django.views.generic import TemplateView, FormView, DeleteView
 
@@ -72,20 +71,23 @@ class TaskView(LoginRequiredMixin, FormView):
         return context
 
 
-class WeeklyReport(TemplateView):
+class WeeklyReport(LoginRequiredMixin, TemplateView):
     template_name = 'habits/weekly-report.html'
 
     def get_context_data(self, **kwargs):
-        today = now().date()
+        today = datetime.now(self.request.user.timezone).date()
         a_week_ago = today - timedelta(days=7)
         total = Counter()
         completed = Counter()
-        for task in Task.objects.select_related('habit').filter(date__gte=a_week_ago, date__lt=today).order_by('order'):
+        for task in Task.objects.select_related('habit').filter(
+                date__gte=a_week_ago,
+                date__lt=today,
+                habit__user=self.request.user,
+        ).order_by('order'):
             total[task.habit] += 1
-            if task.completed:
-                completed[task.habit] += 1
+            completed[task.habit] += task.completed
 
-        streaks_and_goals = generate_streaks_and_goals(total)
+        streaks_and_goals = generate_streaks_and_goals(total, today)
         scores = []
         for habit in total:
             streak, goal = streaks_and_goals[habit]
