@@ -13,7 +13,7 @@ class Habit(OrderedModel):
     morning = models.BooleanField()
     reminder_time = models.CharField(max_length=10, blank=True, default='')
     active = models.BooleanField(default=True)
-    show_streaks = models.BooleanField(default=True)
+    streaks = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta(OrderedModel.Meta):
