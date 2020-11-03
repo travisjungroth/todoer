@@ -28,7 +28,7 @@ def make_tasks(morning, api, user_now, user):
     habits = Habit.objects.filter(active=True, morning=morning, days__contains=[user_now.weekday()], user=user)
     streaks_and_goals = generate_streaks_and_goals(habits, user_now.date())
     for habit in habits:
-        if habit.streaks_and_goals:
+        if habit.streaks:
             streak, goal = streaks_and_goals[habit]
             text = f'{habit.name} [{streak}/{goal}] #habits today'
         else:
