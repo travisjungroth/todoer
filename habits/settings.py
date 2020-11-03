@@ -126,3 +126,7 @@ INTERNAL_IPS = [
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+BOOTSTRAP4 = {
+    'theme_url': 'https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/litera/bootstrap.min.css'
+}
