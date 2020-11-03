@@ -15,5 +15,6 @@ urlpatterns = [
     path('habits/<int:pk>/delete', views.HabitDelete.as_view(), name='habit-delete'),
     path('tasks/', views.TaskView.as_view(), name='tasks'),
     path('weekly-report/', views.WeeklyReport.as_view(), name='weekly-report'),
+    path('documentation/', views.Documentation.as_view(), name='documentation'),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
