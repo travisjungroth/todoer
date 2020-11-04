@@ -1,6 +1,3 @@
-import requests
-
-from allauth.socialaccount import app_settings
 from todoist import TodoistAPI
 
 from .provider import TodoistProvider
@@ -19,6 +16,7 @@ class TodoistOAuth2Adapter(OAuth2Adapter):
 
     def complete_login(self, request, app, token, **kwargs):
         api = TodoistAPI(str(token))
+        api.sync()
         extra_data = api.user.get()
         return self.get_provider().sociallogin_from_response(request, extra_data)
 
