@@ -23,9 +23,12 @@ class Command(BaseCommand):
                 if user_now.hour != 0 or user_now.fold:
                     continue
 
-                project_id = api.projects.all(
-                    lambda x: x['name'] == 'habits' and not x['is_archived']
-                )[-1]['id']
+                try:
+                    project_id = api.projects.all(
+                        lambda x: x['name'] == 'habits' and not x['is_archived']
+                    )[-1]['id']
+                except (IndexError, KeyError):
+                    continue
 
                 for uncompleted_item in api.projects.get_data(project_id)['items']:
                     api.items.delete(uncompleted_item['id'])
