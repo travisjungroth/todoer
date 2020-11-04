@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/logout/', logout, name="logout"),
     path('accounts/', include('todoist_oauth2.urls')),
+    path("accounts/social/", include("allauth.socialaccount.urls")),
     path('habits/', views.HabitView.as_view(), name='habits'),
     path('habits/<int:pk>/move/<str:direction>/', views.HabitMove.as_view(), name='habit-reorder'),
     path('habits/<int:pk>/delete', views.HabitDelete.as_view(), name='habit-delete'),
