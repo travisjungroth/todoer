@@ -1,4 +1,15 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block main %}
+    <div class="jumbotron mt-5">
+        <h1 class="display-4">Better Habit Tracking For Todoist</h1>
+        <hr class="my-4">
+        <ul>
+            <li>Generate new tasks from habits every day.</li>
+            <li>Weekly reporting.</li>
+            <li>Mark tasks as completed in Todoist.</li>
+        </ul>
+        <p>Habits for Todoist is free and imperfect.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'todoist_login' %}" role="button">Sign Up with Todoist</a>
+    </div>
 {% endblock %}
