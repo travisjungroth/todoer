@@ -130,3 +130,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 BOOTSTRAP4 = {
     'theme_url': 'https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/litera/bootstrap.min.css'
 }
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
