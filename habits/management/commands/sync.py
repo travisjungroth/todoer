@@ -33,13 +33,10 @@ class Command(BaseCommand):
                 for uncompleted_item in api.projects.get_data(project_id)['items']:
                     api.items.delete(uncompleted_item['id'])
 
-                for completed_item in api.items.get_completed(project_id):
-                    try:
-                        task = Task.objects.get(todoist_id=completed_item['id'], habit__user=user)
-                        task.completed = True
-                        task.save()
-                    except Task.DoesNotExist:
-                        pass
+                Task.objects.filter(
+                    todoist_id__in=[x['id'] for x in api.items.get_completed(project_id)],
+                    habit__user=user,
+                ).update(completed=True)
 
                 api.commit(raise_on_error=True)
                 api.sync()
