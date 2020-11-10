@@ -21,6 +21,10 @@ class Documentation(TemplateView):
     template_name = 'documentation.html'
 
 
+class Privacy(TemplateView):
+    template_name = 'privacy.html'
+
+
 class HabitView(LoginRequiredMixin, FormView):
     template_name = 'habits/habits.html'
     form_class = HabitFormSet

@@ -16,5 +16,6 @@ urlpatterns = [
     path('tasks/', views.TaskView.as_view(), name='tasks'),
     path('weekly-report/', views.WeeklyReport.as_view(), name='weekly-report'),
     path('documentation/', views.Documentation.as_view(), name='documentation'),
+    path('privacy/', views.Privacy.as_view(), name='privacy'),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
