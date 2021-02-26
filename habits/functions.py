@@ -4,10 +4,10 @@ from habits.models import Task, Habit
 
 
 def generate_streaks_and_goals(habits, today):
-    d = {}
+    d = {habit: [] for habit in habits}
     for task in Task.objects.select_related('habit').filter(date__lt=today, habit__in=habits).order_by(
             'habit__order', 'date'):
-        d.setdefault(task.habit, []).append(task.completed)
+        d[task.habit].append(task.completed)
     return {habit: f_streak(bools) for habit, bools in d.items()}
 
 
