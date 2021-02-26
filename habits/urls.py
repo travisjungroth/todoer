@@ -1,5 +1,6 @@
 from allauth.account.views import logout
 import debug_toolbar
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 
@@ -17,5 +18,7 @@ urlpatterns = [
     path('weekly-report/', views.WeeklyReport.as_view(), name='weekly-report'),
     path('documentation/', views.Documentation.as_view(), name='documentation'),
     path('privacy/', views.Privacy.as_view(), name='privacy'),
-    path('__debug__/', include(debug_toolbar.urls)),
 ]
+
+if settings.DEBUG:
+    urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))

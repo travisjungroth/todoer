@@ -10,9 +10,9 @@ python_version = "3.9.2"
 pytest = "*"
 "pytest-cov" = "*"
 "pytest-django" = "*"
-django-debug-toolbar = "*"
 
 [packages]
+django-debug-toolbar = "*"
 "dj-database-url" = "*"
 django = "*"
 "django-environ" = "*"
