@@ -46,7 +46,7 @@ class Command(BaseCommand):
                 ids = make_tasks(morning=True, api=api, user_now=user_now, user=user)
                 ids.extend(existing_today_tasks)
                 ids.extend(make_tasks(morning=False, api=api, user_now=user_now, user=user))
-                ids_to_orders = {id_: i for i, id_ in enumerate(ids)}
+                ids_to_orders = {id_: i for i, id_ in enumerate(ids, start=1)}
                 api.items.update_day_orders(ids_to_orders)
                 api.commit(raise_on_error=True)
             except Exception as e:
