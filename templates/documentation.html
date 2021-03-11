@@ -3,27 +3,27 @@
 {% block main %}
     <h1>Documentation</h1>
     <h2>Setup</h2>
-    <p>Follow the Sign Up or Login with Todoist button to create your account here and give access to your Todo app.
-    Create a project in Todoist called "habits". This is will all your habit tasks will go.</p>
+    <p><a href="{% url 'todoist_login' %}">Sign Up or Login with Todoist</a> to create your account here and give access to your Todo app.
+    Create a project in Todoist called "habits". This is where all your habit tasks will go.</p>
     <h2>Background</h2>
     <p>I made this project for myself, and then thought it might be useful to other people. Who knows how long it will
     be going (certainly not forever). I hope you enjoy it.</p>
     <h4>Purpose</h4>
     <p>The aim of Habits for Todoist is to give much better habit support in Todoist. The focus is on generating tasks
-        and tracking their completion. I found recurring tasks in Todoist wanting for these purposes.</p>
-    <h2>Habits</h2>
+        and tracking their completion. I found recurring tasks in Todoist not great for this.</p>
+    <h2><a href="{% url 'habits' %}">Habits</a></h2>
     <p>This screen is where you define your Habits that will be used to generate your Tasks. Think of them like
     templates. At about 12:15am each night, based on the time on your Todoist account, new Tasks will be created in
     Todoist and this app based on these templates.</p>
     <h4>Name</h4>
-    The name that the Task in Todoist will get. Be careful to avoid any Todoist keywords like deadlines or projects.
+    The name that the Task in Todoist will get. Be careful to avoid any Todoist keywords like times or dates.
     Labels are okay.
     <h4>Days</h4>
     All habits are based on a weekly schedule. Select which days of the week you want them to be active. You have to
     select at least one (but can use the Active checkbox to deactivate it).
     <h4>Morning</h4>
     The Morning checkbox defines how your habits interact with your existing Todoist Tasks for the day. Tasks checked
-    with Morning will go <em>before</em> your other Tasks. If left unchecked, they'll go after. Priorty and due times
+    with Morning will go <em>before</em> your other Tasks. If left unchecked, they'll go after. Priority and due times
     will override this order.
     <h4>Reminder time</h4>
     When you want to get a reminder in Todoist if the Task is unfinished. Use the same format you would use in Todoist,
@@ -45,7 +45,7 @@
     not save any of the other changes you've made.
     <h4>Delete</h4>
     Deleting a Habit will also delete all Tasks associated with that Habit.
-    <h2 id="tasks">Tasks</h2>
+    <h2 id="tasks"><a href="{% url 'tasks' %}">Tasks</a></h2>
     <p>You will generally just need to view this page when you forgot to mark a Task as complete, or want to delete
     Tasks that were created erroneously.</p>
     <h2>Weekly Report</h2>
