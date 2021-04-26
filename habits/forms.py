@@ -12,6 +12,7 @@ class HabitForm(forms.ModelForm):
         empty_value=None,
         widget=forms.CheckboxSelectMultiple(),
     )
+    reminder_time = forms.CharField(widget=forms.TextInput(attrs={'style': 'max-width: 6em'}))
 
     class Meta:
         model = Habit
