@@ -15,6 +15,7 @@ class Habit(OrderedModel):
     active = models.BooleanField(default=True)
     streaks = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    order_with_respect_to = 'user'
 
     class Meta(OrderedModel.Meta):
         pass
